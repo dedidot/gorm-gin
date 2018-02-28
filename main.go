@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
-	//"net/http"
+	"./ApiHelpers"
 )
 
 var db *gorm.DB
@@ -23,7 +23,7 @@ func (b *Book) TableName() string {
 }
 
 func main() {
-	db, _ = gorm.Open("mysql", "root:root@tcp(127.0.0.1:3306)/testinger?charset=utf8&parseTime=True&loc=Local")
+	db, _ = gorm.Open("mysql", "root:@tcp(127.0.0.1:3306)/testinger?charset=utf8&parseTime=True&loc=Local")
 
 	if err != nil {
 		fmt.Println(err)
@@ -51,6 +51,6 @@ func ListBook(c *gin.Context) {
 	} else {
 		//fmt.Println(book)
 		//c.JSON(200, gin.H{"data": book})
-		respondJSON(c, 200, book)
+		ApiHelpers.RespondJSON(c, 200, book)
 	}
 }
