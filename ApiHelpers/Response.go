@@ -1,8 +1,8 @@
 package ApiHelpers
 
 import (
-	"github.com/gin-gonic/gin"
 	"fmt"
+	"github.com/gin-gonic/gin"
 )
 
 type ResponseData struct {
