@@ -2,10 +2,10 @@ package main
 
 import (
 	"./Config"
-	"./Controllers"
 	"./Models"
+	"./Routers"
 	"fmt"
-	"github.com/gin-gonic/gin"
+	//"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 )
 
@@ -13,7 +13,7 @@ var err error
 
 func main() {
 
-	Config.DB, err = gorm.Open("mysql", "root:@tcp(127.0.0.1:3306)/testinger?charset=utf8&parseTime=True&loc=Local")
+	Config.DB, err = gorm.Open("mysql", "root:root@tcp(127.0.0.1:3306)/testinger?charset=utf8&parseTime=True&loc=Local")
 
 	if err != nil {
 		fmt.Println("statuse: ", err)
@@ -23,12 +23,12 @@ func main() {
 	Config.DB.AutoMigrate(&Models.Book{})
 
 	// route
-	r := gin.Default()
-	v1 := r.Group("/v1")
-	{
-		v1.GET("book", Controllers.ListBook)
-	}
-
+	/*	r := gin.Default()
+		v1 := r.Group("/v1")
+		{
+			v1.GET("book", Controllers.ListBook)
+		}*/
+	r := Routers.SetupRouter()
 	// running
 	r.Run()
 }

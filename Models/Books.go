@@ -13,3 +13,25 @@ func GetAllBook(b *[]Book) (err error) {
 	}
 	return nil
 }
+
+func AddNewBook(b *Book) (err error) {
+	if err = Config.DB.Create(b).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+func GetOneBook(b *Book, id string) (err error) {
+	if err := Config.DB.Where("id = ?", id).First(b).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+func PutOneBook(b *Book, id string) (err error) {
+	if err := Config.DB.Where("id = ?", id).First(b).Error; err != nil {
+		return err
+	}
+	Config.DB.Save(b)
+	return nil
+}
